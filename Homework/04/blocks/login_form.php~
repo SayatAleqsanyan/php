@@ -1,0 +1,14 @@
+<?php
+if (isset($_SESSION['error'])) {
+    echo "<p style='color:red'>" . $_SESSION['error'] . "</p>";
+    unset($_SESSION['error']);
+}
+?>
+
+<form action="action/action_login.php" method="post">
+    <input type="email" name="email" placeholder="Email"
+           value="<?php echo isset($_COOKIE['email']) ? $_COOKIE['email'] : ''; ?>" required><br>
+    <input type="password" name="password" placeholder="Password" required><br>
+    <label><input type="checkbox" name="remember" <?php echo isset($_COOKIE['email']) ? 'checked' : ''; ?>> Remember Me</label><br>
+    <input type="submit" name="login" value="Login"><br>
+</form>

@@ -14,13 +14,8 @@ if (isset($_POST['login'])
     $password = $_POST["password"];
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-    $line = $email . '|' .
-        $hashed_password . '|' .
-        $_POST['First_Name'] . '|' .
-        $_POST['Last_Name'] . '|' .
-        $_POST['Date_of_Birth'] . '|' .
-        $_POST['Country'] . '|' .
-        $_POST['gender'] . "\n";
+    $line = $email . '|' . $hashed_password . '|' . $_POST['First_Name'] . '|' . $_POST['Last_Name'] . '|' .
+        $_POST['Date_of_Birth'] . '|' . $_POST['Country'] . '|' . $_POST['gender'] . "\n";
 
     // Ստուգում ենք կրկնվող email
     if (file_exists('../data/users.txt')) {
@@ -35,8 +30,10 @@ if (isset($_POST['login'])
         }
     }
 
+    // Գրանցում ենք
     file_put_contents('../data/users.txt', $line, FILE_APPEND);
 
+    // Սկսում ենք session
     $_SESSION['email'] = $email;
     $_SESSION['First_Name'] = $_POST['First_Name'];
     $_SESSION['Last_Name'] = $_POST['Last_Name'];

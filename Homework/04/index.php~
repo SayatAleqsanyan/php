@@ -1,0 +1,41 @@
+<?php
+session_start();
+require_once './includes/functions.php';
+require_once './includes/csrf.php';
+
+// Սահմանում ենք session timeout-ը
+define('SESSION_TIMEOUT', 60); // 1 րոպե
+
+// Ստուգում ենք session timeout-ը
+if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > SESSION_TIMEOUT)) {
+    session_unset();
+    session_destroy();
+    header("Location: index.php");
+    exit();
+}
+$_SESSION['LAST_ACTIVITY'] = time();
+
+// Ստուգում ենք remember me cookie-ն
+if (!isset($_SESSION['email']) && isset($_COOKIE['email'])) {
+    $_SESSION['email'] = $_COOKIE['email'];
+    // Այստեղ կարող եք ավելացնել լրացուցիչ ստուգումներ
+}
+
+$mode = $_GET['mode'] ?? 'login';
+?>
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+    <meta charset="UTF-8">
+    <title>Մուտք / Գրանցում</title>
+</head>
+<body>
+<?php
+if ($mode === 'register') {
+    include './blocks/register_form.php';
+} else {
+    include './blocks/login_form.php';
+}
+?>
+</body>
+</html>
