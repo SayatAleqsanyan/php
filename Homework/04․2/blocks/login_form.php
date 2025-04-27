@@ -1,11 +1,13 @@
 <?php
 require_once 'includes/csrf.php';
 
+// "Remember me" cookie-ից email-ի ստացում
 $remembered_email = '';
 if (isset($_COOKIE['remember_email'])) {
     $remembered_email = $_COOKIE['remember_email'];
 }
 
+// Անհաջող փորձերի հաշվիչ
 if (!isset($_SESSION['login_attempts'])) {
     $_SESSION['login_attempts'] = 0;
 }
@@ -58,16 +60,19 @@ $form_disabled = ($_SESSION['login_attempts'] >= 3) ? 'disabled' : '';
     let captcha = document.getElementById('captcha').value;
     let isValid = true;
 
+    // Ստուգում ենք Email-ը
     if (!email || !email.includes('@')) {
       alert('Խնդրում ենք մուտքագրել ճիշտ էլ. հասցե');
       isValid = false;
     }
 
+    // Ստուգում ենք գաղտնաբառը
     if (!password || password.length < 8) {
       alert('Գաղտնաբառը պետք է լինի առնվազն 8 նիշ');
       isValid = false;
     }
 
+    // Ստուգում ենք captcha-ն
     if (captcha !== 'security') {
       alert('Captcha-ն սխալ է: Խնդրում ենք մուտքագրել "security"');
       isValid = false;

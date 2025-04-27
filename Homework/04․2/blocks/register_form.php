@@ -59,16 +59,19 @@ require_once 'includes/csrf.php';
     let password = document.getElementById('reg_password').value;
     let isValid = true;
 
+    // Ստուգում ենք Email-ը
     if (!email || !email.includes('@')) {
       alert('Խնդրում ենք մուտքագրել ճիշտ էլ. հասցե');
       isValid = false;
     }
 
+    // Ստուգում ենք գաղտնաբառը
     if (!password || password.length < 8) {
       alert('Գաղտնաբառը պետք է լինի առնվազն 8 նիշ');
       isValid = false;
     }
 
+    // Ստուգում ենք, որ գաղտնաբառը սկսվի մեծատառով և պարունակի թիվ
     if (!/^[A-Z].*\d/.test(password)) {
       alert('Գաղտնաբառը պետք է սկսվի մեծատառով և պարունակի թիվ');
       isValid = false;

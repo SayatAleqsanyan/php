@@ -1,4 +1,7 @@
 <?php
+// Այստեղ պահում ենք թույլատրված օգտագործողների ցանկը
+// Գաղտնաբառերը հեշավորված են bcrypt ալգորիթմով
+
 $authorized_users = [
     'Ml2bA@example.com' => [
         'email' => 'Ml2bA@example.com',
@@ -9,8 +12,10 @@ $authorized_users = [
         'additional' => 'dsafas',
         'gender' => 'male'
     ],
+    // Կարող ենք ավելացնել այլ օգտագործողներ
 ];
 
+// Ֆունկցիա օգտագործողին զանգվածից գտնելու համար
 function findUserInArray($email) {
     global $authorized_users;
 

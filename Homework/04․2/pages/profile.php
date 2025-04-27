@@ -1,11 +1,13 @@
 <?php
 require_once '../includes/functions.php';
 
+// Ստուգում ենք՝ օգտվողը մուտք գործա՞ծ է
 if (!isset($_SESSION['email'])) {
     header('Location: ../index.php');
     exit;
 }
 
+// Ստուգում ենք սեսիայի ակտիվությունը
 if (!checkSessionActivity()) {
     header('Location: ../action/action_logout.php');
     exit;
@@ -99,10 +101,11 @@ $user = $_SESSION['user'];
 </div>
 
 <script>
+  // Սեսիայի ինքնաշխատ ավարտ ժամանակի լրանալուց հետո
   setTimeout(function() {
     alert('Ձեր սեսիան ավարտվել է: Խնդրում ենք նորից մուտք գործել');
     window.location.href = '../action/action_logout.php';
-  }, 60000);
+  }, 60000); // 1 րոպե
 </script>
 </body>
 </html>

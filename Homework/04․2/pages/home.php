@@ -1,11 +1,13 @@
 <?php
 require_once '../includes/functions.php';
 
+// Ստուգում ենք՝ օգտվողը մուտք գործա՞ծ է
 if (!isset($_SESSION['email'])) {
     header('Location: ../index.php');
     exit;
 }
 
+// Ստուգում ենք սեսիայի ակտիվությունը
 if (!checkSessionActivity()) {
     header('Location: ../action/action_logout.php');
     exit;
@@ -13,6 +15,7 @@ if (!checkSessionActivity()) {
 
 $email = $_SESSION['email'];
 $user = $_SESSION['user'];
+$login_time = $_SESSION['login_time'] ?? 'Անհայտ';
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +23,7 @@ $user = $_SESSION['user'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Անձնական էջ</title>
+    <title>Գլխավոր էջ</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -28,7 +31,7 @@ $user = $_SESSION['user'];
             margin: 0 auto;
             padding: 20px;
         }
-        .profile-box {
+        .welcome-box {
             background-color: #f0f0f0;
             padding: 20px;
             border-radius: 5px;
@@ -55,54 +58,30 @@ $user = $_SESSION['user'];
         .logout {
             background-color: #f44336;
         }
-        dl {
-            display: grid;
-            grid-template-columns: max-content auto;
-            gap: 10px;
-        }
-        dt {
-            font-weight: bold;
-        }
     </style>
 </head>
 <body>
-<div class="profile-box">
-    <h1>Անձնական էջ</h1>
+<div class="welcome-box">
+    <h1>Welcome, <?php echo htmlspecialchars($email); ?></h1>
+    <p>Մուտքի ժամանակ: <?php echo htmlspecialchars($login_time); ?></p>
 </div>
 
 <div class="nav">
-    <a href="home.php" class="button">Գլխավոր էջ</a>
+    <a href="profile.php" class="button">Անձնական էջ</a>
     <a href="../action/action_logout.php" class="button logout">Դուրս գալ</a>
 </div>
 
 <div class="content">
-    <h2>Օգտվողի տվյալներ</h2>
-    <dl>
-        <dt>Էլ. հասցե:</dt>
-        <dd><?php echo htmlspecialchars($email); ?></dd>
-
-        <dt>Անուն:</dt>
-        <dd><?php echo htmlspecialchars($user['firstname'] ?? 'Նշված չէ'); ?></dd>
-
-        <dt>Ազգանուն:</dt>
-        <dd><?php echo htmlspecialchars($user['lastname'] ?? 'Նշված չէ'); ?></dd>
-
-        <dt>Ծննդյան ամսաթիվ:</dt>
-        <dd><?php echo htmlspecialchars($user['birthdate'] ?? 'Նշված չէ'); ?></dd>
-
-        <dt>Սեռ:</dt>
-        <dd><?php echo htmlspecialchars($user['gender'] === 'male' ? 'Արական' : 'Իգական'); ?></dd>
-
-        <dt>Լրացուցիչ տեղեկություն:</dt>
-        <dd><?php echo htmlspecialchars($user['additional'] ?? 'Նշված չէ'); ?></dd>
-    </dl>
+    <h2>Բարի գալուստ մեր կայք</h2>
+    <p>Սա գլխավոր էջն է, որը տեսանելի է միայն մուտք գործած օգտվողների համար:</p>
 </div>
 
 <script>
+  // Սեսիայի ինքնաշխատ ավարտ ժամանակի լրանալուց հետո
   setTimeout(function() {
     alert('Ձեր սեսիան ավարտվել է: Խնդրում ենք նորից մուտք գործել');
     window.location.href = '../action/action_logout.php';
-  }, 60000);
+  }, 60000); // 1 րոպե
 </script>
 </body>
 </html>
