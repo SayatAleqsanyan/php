@@ -1,0 +1,42 @@
+<?php
+session_start();
+
+global $db;
+
+$to_user_id = 1;
+$from_user_id = 2;
+$id = 2;
+
+$sql = "INSERT INTO followers 
+            (to_user_id, from_user_id, status) 
+        VALUES 
+            ('$to_user_id', '$from_user_id', 2)";
+$result = mysqli_query($db, $sql);
+if ($result) {
+    echo "send success";
+}
+
+//-------------------------------------------
+$sql = "SELECT * FROM followers WHERE from_user_id = $id";
+$result = mysqli_query($db, $sql);
+while ($row = mysqli_fetch_assoc($result)) {
+    $to_user_id = $row["to_user_id"];
+    $from_user_id = $row["from_user_id"];
+    $status = $row["status"];
+}
+//----------------------------------------------
+
+$status = 1;
+//$status = [1,2,3];
+//$status_str = json_decode($status, true);
+$sql = "UPDATE followers SET status = $status  WHERE from_user_id = $from_user_id AND to_user_id = $to_user_id";
+$result = mysqli_query($db, $sql);
+if ($result) {
+    echo "send success";
+}
+
+
+
+
+
+//$sql = "DELETE FROM followers";<?php
