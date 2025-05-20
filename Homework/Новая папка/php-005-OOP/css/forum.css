@@ -1,0 +1,125 @@
+/* Հաղորդագրությունների կոնտեյներ */
+.messages {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    height: 80vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    scroll-behavior: smooth;
+}
+
+/* Հաղորդագրության կոնտեյներ՝ լայնության 100% */
+.message-container {
+    width: 100%;
+    display: flex;
+    margin-bottom: 15px;
+    clear: both;
+}
+
+/* Սովորական հաղորդագրությունների համար - ձախ հատվածում */
+.message-container {
+    justify-content: flex-start;
+}
+
+/* Իմ հաղորդագրությունների համար - աջ հատվածում */
+.message-container.my-container {
+    justify-content: flex-end;
+}
+
+/* Բլոկի հիմնական ստայլ - 75% լայնություն */
+.message {
+    width: 75%;
+    border-radius: 12px;
+    background-color: #e9e9eb;
+    position: relative;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.my-message {
+    background-color: #dcf8c6;
+}
+
+/* Բլոկի վերնագրի հատված (անուն և ժամ) */
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    background-color: rgba(0, 0, 0, 0.03);
+    border-radius: 12px 12px 0 0;
+}
+
+/* Անուն */
+.message-name {
+    font-weight: bold;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Ժամ */
+.message-time {
+    font-size: 12px;
+    color: #777;
+}
+
+/* Հաղորդագրության տեքստի հատված */
+.message-text {
+    padding: 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+/* Իմ հաղորդագրությունների անվան և ժամանակի գույներ */
+.my-message .message-name {
+    color: #1a73e8;
+}
+
+.my-message .message-header {
+    background-color: rgba(26, 115, 232, 0.05);
+}
+
+/* Անիմացիաներ */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.message {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Սքրոլի համար "ghost" էլեմենտ */
+.messages::after {
+    content: "";
+    height: 1px;
+    display: block;
+    overflow-anchor: auto;
+}
+
+/* Հարմարեցումներ փոքր էկրանների համար */
+@media (max-width: 768px) {
+    .message {
+        width: 85%;
+    }
+}
+
+@media (max-width: 480px) {
+    .message {
+        width: 95%;
+    }
+
+    .message-header {
+        padding: 6px 10px;
+    }
+
+    .message-text {
+        padding: 10px;
+        font-size: 13px;
+    }
+}

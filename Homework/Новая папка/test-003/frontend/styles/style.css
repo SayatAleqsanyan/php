@@ -1,0 +1,81 @@
+.app {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+#posts-container {
+    max-width: 1280px;
+    min-width: 560px;
+    margin: 0 auto;
+    padding: 10px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+#posts-container:hover .post-item {
+    opacity: .7;
+    cursor: pointer;
+    filter: grayscale(1);
+}
+
+#posts-container .post-item {
+    margin: 10px;
+    width: 300px;
+    float: left;
+    box-shadow: 0 0 2px 2px rgba(0,0,0,.05);
+    background: #FFF;
+    -webkit-transition: .3s all ease;
+    transition: .15s all ease;
+    border-radius: 12px;
+}
+
+#posts-container .card:hover {
+    box-shadow: 0 0 8px 3px rgba(0,0,0,.15);
+    transform: scale(1.025);
+    opacity: 1;
+    filter: grayscale(0);
+    transition: .35s all ease;
+}
+
+#posts-container .post-item img {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+#posts-container .post-item .content {
+    padding: 15px 20px;
+}
+
+#posts-container .post-item h3 {
+    font: 2.8rem/3.4rem 'Bree Serif', serif;
+    padding: 0;
+    margin: 0 0 10px;
+    letter-spacing: -.075rem
+}
+
+#posts-container .post-item p {
+    color: #888;
+    padding: 0;
+    margin: 0;
+    font: 400 1.6rem/2.2rem 'Open Sans script=all', sans-serif;
+}
+
+.content .edit-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+#post-form {
+    padding: 20px 200px;
+}
+
+.post-like.active {
+    color: green;
+}
+
+.post-dislike.active {
+    color: red;
+}
